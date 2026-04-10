@@ -1,6 +1,5 @@
 
-```markdown
-# 🇮🇳 IndiaTax-Manager
+# IndiaTax-Manager
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg?logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-2.x-black.svg?logo=flask&logoColor=white)
