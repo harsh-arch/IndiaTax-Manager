@@ -1,9 +1,4 @@
 
----
-
-
----
-
 ```markdown
 # 🇮🇳 IndiaTax-Manager
 
@@ -147,4 +142,3 @@ The application currently runs with `debug=True` and `host='127.0.0.1'` in `app.
 
 ## 📝 License
 This project is open-source and available under the [MIT License](LICENSE).
-```
