@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Welcome to your Dashboard, {{ current_user.id }}!</h2>
+    <p>Manage your tax information here.</p>
+
+    <h3>Data Entry</h3>
+    <ul>
+        <li><a href="{{ url_for('data.add_income') }}">Add Income Record</a></li>
+        <li><a href="{{ url_for('data.add_expense') }}">Add Expense Record</a></li>
+        {# Add link for Deductions/Credits entry later #}
+    </ul>
+
+    <h3>Reporting & Filing</h3>
+ <ul>
+    <li><a href="{{ url_for('results.tax_summary', year=current_year) }}">View Tax Summary ({{current_year}})</a></li>
+    {# Add link for History later #}
+-   <li><a href="#">View Filing History</a></li>
++   <li><a href="{{ url_for('auth.history') }}">View Filing History</a></li>
+</ul>
+
+    <h3>Profile</h3>
+<ul>
+    {# Add link for Profile/Filing Status later #}
+-    <li><a href="#">Update Profile / Filing Status</a></li>
++    <li><a href="{{ url_for('auth.profile') }}">Update Profile / Filing Status</a></li>
+</ul>
+
+
+{% endblock %}

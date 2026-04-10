@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+    <h2>Tax Summary for {{ year }}</h2>
+
+    {% if results and not results.error %}
+        <p><strong>Filing Status:</strong> {{ results.filing_status }}</p>
+
+        <h3>Summary</h3>
+        <table border="1" cellpadding="5">
+            <tr>
+                <td>Gross Income</td>
+                <td align="right">{{ results.gross_income | money }}</td>
+            </tr>
+             <tr>
+                <td>Itemized Deductions (Calculated)</td>
+                <td align="right">{{ results.itemized_deductions | money }}</td>
+            </tr>
+            <tr>
+                <td>Standard Deduction</td>
+                <td align="right">{{ results.standard_deduction | money }}</td>
+            </tr>
+            <tr>
+                <td>Deduction Taken (Larger of Itemized/Standard)</td>
+                <td align="right"><strong>{{ results.chosen_deduction | money }}</strong></td>
+            </tr>
+             <tr style="border-top: 1px solid black;">
+                <td><strong>Taxable Income</strong> (Gross Income - Deduction)</td>
+                <td align="right"><strong>{{ results.taxable_income | money }}</strong></td>
+            </tr>
+            <tr>
+                <td>Calculated Tax (Before Credits)</td>
+                <td align="right">{{ results.calculated_tax | money }}</td>
+            </tr>
+             <tr>
+                <td>Total Tax Credits Applied</td>
+                <td align="right">- {{ results.total_credits | money }}</td>
+            </tr>
+             <tr style="border-top: 1px solid black; font-weight: bold; background-color: #f0f0f0;">
+                <td>Final Tax Liability</td>
+                <td align="right">{{ results.final_tax_liability | money }}</td>
+            </tr>
+        </table>
+
+        <h3>Tax Bracket Breakdown</h3>
+        <p>How your taxable income was taxed:</p>
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Income Up To</th>
+                    <th>Tax Rate</th>
+                    <th>Amount Taxed at this Rate</th>
+                    <th>Tax Paid in this Bracket</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bracket_info in results.tax_breakdown %}
+                <tr>
+                    <td>{{ bracket_info.limit if bracket_info.limit != 'Infinity' else 'Above Last Limit' }}</td>
+                    <td>{{ bracket_info.rate }}</td>
+                    <td align="right">{{ bracket_info.taxable_amount | money }}</td>
+                    <td align="right">{{ bracket_info.tax_paid | money }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No tax breakdown available (Taxable income might be zero).</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+         </table>
+         <br>
+         {# Link to PDF Download - Added in next step #}
+         <a href="{{ url_for('results.download_summary', year=year) }}" class="button">Download PDF Summary</a>
+
+    {% elif results.error %}
+        <p class="errors">Could not calculate tax summary: {{ results.error }}</p>
+    {% else %}
+         <p>No calculation results available.</p>
+    {% endif %}
+
+    <p style="margin-top: 20px;">
+        <a href="{{ url_for('auth.dashboard') }}">Back to Dashboard</a>
+    </p>
+    <p><small>Disclaimer: This is a simplified calculation for educational purposes only. Consult a tax professional for official advice.</small></p>
+
+{% endblock %}

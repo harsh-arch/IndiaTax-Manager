@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{# REMOVE the filter definition block from here #}
+{# {% filter money(value) %}{% if value is not none %}{{"${:,.2f}".format(value)}}{% else %}N/A{% endif %}{% endfilter %} #}
+
+{% block content %}
+    <h2>Tax Filing History</h2>
+
+    {% if history_data %}
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Tax Year</th>
+                    <th>Gross Income</th>
+                    <th>Taxable Income</th>
+                    <th>Final Tax Liability</th>
+                    <th>Status/Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in history_data %}
+                <tr>
+                    <td>{{ item.year }}</td>
+                    <td align="right">{{ item.gross_income | money }}</td>
+                    <td align="right">{{ item.taxable_income | money }}</td>
+                     <td align="right">{{ item.final_tax_liability | money }}</td>
+                    <td>
+                        {% if item.error %}
+                            <span style="color:red;">Error: {{ item.error }}</span>
+                        {% else %}
+                            {# Link to full summary for that year #}
+                            <a href="{{ url_for('results.tax_summary', year=item.year) }}">View Summary</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ item.year }}</td>
+                    {# Now just use the filter directly #}
+                    <td align="right">{{ item.gross_income | money }}</td>
+                    <td align="right">{{ item.taxable_income | money }}</td>
+                     <td align="right">{{ item.final_tax_liability | money }}</td>
+                    <td>
+                        {% if item.error %}
+                            <span style="color:red;">Error: {{ item.error }}</span>
+                        {% else %}
+                            <a href="{{ url_for('results.tax_summary', year=item.year) }}">View Summary</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+         {# Add Year-over-Year comparison chart using JS later if desired #}
+
+    {% else %}
+        <p>No filing history found. Add income/expenses to get started.</p>
+    {% endif %}
+
+    <p style="margin-top: 20px;">
+        <a href="{{ url_for('auth.dashboard') }}">Back to Dashboard</a>
+    </p>
+
+{% endblock %}

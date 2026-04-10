@@ -1,0 +1,47 @@
+he authentication system:
+
+1. Project Structure
+We'll have a simple users.txt file to store user credentials in the format username:password. We'll use Python's file handling functions to read from and write to this file.
+
+graphql
+Copy code
+tax_web/
+│
+├── app.py              # Python backend (Flask)
+├── templates/          # HTML files for frontend
+│   ├── login.html      # Login page
+│   ├── welcome.html    # Welcome page after login
+├── static/             # CSS and JavaScript files
+│   ├── css/
+│   │   └── style.css   # Styling for your pages
+│   ├── js/
+│   │   └── app.js      # JavaScript for frontend logic
+└── users.txt           # Text file to store user credentials
+
+tax_web/
+│
+├── app.py                 # Main Flask application
+├── file_handler.py        # Functions for reading/writing data files
+├── tax_logic.py           # Core tax calculation functions (will add later)
+├── forms.py               # WTForms definitions
+├── config.py              # Configuration (file paths, secret key - HARDCODED)
+├── requirements.txt       # Python dependencies
+│
+├── data/                  # Directory to store data files
+│   ├── users.json         # Stores user credentials {username: hashed_password}
+│   └── user_data/         # Subdirectory for individual user financial data
+│       └── .gitkeep       # Placeholder to ensure directory is created
+│
+├── templates/             # HTML files (Jinja2)
+│   ├── base.html          # Base template
+│   ├── auth/
+│   │   ├── login.html
+│   │   └── register.html
+│   └── user/
+│       └── dashboard.html   # Simple dashboard after login
+│
+├── static/                # CSS, JavaScript
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── app.js

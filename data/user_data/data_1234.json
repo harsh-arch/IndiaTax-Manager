@@ -1,0 +1,42 @@
+{
+    "profile": {
+        "filing_status": "Single"
+    },
+    "financials": {
+        "2025": {
+            "income": [
+                {
+                    "id": "1b43abce-366d-45f3-aec1-291a97463792",
+                    "source": "1 st work",
+                    "amount": 120000.0,
+                    "category": "SalaryW2"
+                },
+                {
+                    "id": "285f5b95-2950-47e9-8f44-44970d1b9dc4",
+                    "source": "ghgj",
+                    "amount": 50000000.0,
+                    "category": "SalaryW2"
+                }
+            ],
+            "expenses": [
+                {
+                    "id": "5b6fb213-9566-49f1-bc94-5aa8c56934df",
+                    "description": "medical",
+                    "amount": 0.01,
+                    "category": "Medical"
+                }
+            ]
+        },
+        "2023": {
+            "income": [
+                {
+                    "id": "66cf1f23-9bc7-417a-b99d-e2aa501410da",
+                    "source": "1 st workg",
+                    "amount": 4210.0,
+                    "category": "SalaryW2"
+                }
+            ],
+            "expenses": []
+        }
+    }
+}
