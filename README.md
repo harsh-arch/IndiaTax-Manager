@@ -17,7 +17,7 @@ Because it uses a custom file-handler instead of a heavy SQL database, it is inc
 **Add Income Page**  
 *Easily log your various income sources for the financial year.*
 <div align="center">
-  <img src="asset/ome_page.png" alt="Add Income Page" width="800" style="border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
+  <img src="assets/ome_page.png" alt="Add Income Page" width="800" style="border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
 </div>
 
 ---
